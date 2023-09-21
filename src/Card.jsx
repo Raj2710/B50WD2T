@@ -9,7 +9,7 @@ function Card(props) {
               <h6 className="card-price text-center">${props.data.price}<span className="period">/month</span></h6>
               <hr/>
               <ul className="fa-ul">
-                <li className={props.data.storageEnabler?'':'text-muted'}><span className="fa-li"><i className={props.data.storageEnabler?"fas fa-check":"fas fa-times"}></i></span>{props.data.storage}</li>
+                <li className={props.data.storageEnabler?'':'text-muted'}><span className="fa-li"><i className={props.data.storageEnabler?"fas fa-check fa-xl":"fas fa-times"}></i></span>{props.data.storage}</li>
                 <li className={props.data.userEnabler?'':'text-muted'}><span className="fa-li"><i className={props.data.userEnabler?"fas fa-check":"fas fa-times"}></i></span>{props.data.user}</li>
                 <li className={props.data.publicProjectsEnabler?'':'text-muted'}><span className="fa-li"><i className={props.data.publicProjectsEnabler?"fas fa-check":"fas fa-times"}></i></span>{props.data.publicProjects}</li>
                 <li className={props.data.communityAccessEnabler?'':'text-muted'}><span className="fa-li"><i className={props.data.communityAccessEnabler?"fas fa-check":"fas fa-times"}></i></span>{props.data.communityAccess}</li>
