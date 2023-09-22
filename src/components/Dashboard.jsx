@@ -1,7 +1,10 @@
 import React from 'react'
 import Tile from './Tile'
-function Dashboard() {
-    let data = [{
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+
+function Dashboard({data,setData}) {
+    let dashboardData = [{
         color:'primary',
         icon:'fa-calendar',
         title:'Earnings (Monthly)',
@@ -25,15 +28,15 @@ function Dashboard() {
         icon:'fa-comments',
         title:'Pending Requests',
         value:'18'
-    },
-    {
-        isProgress:true,
-        color:'danger',
-        icon:'fa-clipboard-list',
-        title:'Declined',
-        value:'10'
-    },
+    }
     ]
+
+    let handleDelete = (index)=>{
+        let newArray = [...data]//deep copy
+        newArray.splice(index,1)
+        setData(newArray)
+    }
+
   return <>
     <div className="container-fluid">
     <div className="d-sm-flex align-items-center justify-content-between mb-4">
@@ -44,7 +47,7 @@ function Dashboard() {
 
     <div className="row">
        {
-        data.map((e,i)=>{
+        dashboardData.map((e,i)=>{
             return <Tile color={e.color}
                          icon={e.icon}
                          title={e.title}
@@ -56,6 +59,42 @@ function Dashboard() {
         })
        }
     </div>
+
+    <div className='row'>
+       <Table striped bordered hover>
+       <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Batch</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+            data.map((e,i)=>{
+                return <tr key={i}>
+                    <td>{i+1}</td>
+                    <td>{e.name}</td>
+                    <td>{e.username}</td>
+                    <td>{e.email}</td>
+                    <td>{e.mobile}</td>
+                    <td>{e.batch}</td>
+                    <td>
+                        <Button variant='primary'>Edit</Button>
+                        &nbsp;
+                        &nbsp;
+                        <Button variant='danger' onClick={()=>handleDelete(i)}>Delete</Button>
+                    </td>
+                </tr>
+            })
+        }
+      </tbody>
+       </Table>
+    </div> 
     </div>
   </>
 }
