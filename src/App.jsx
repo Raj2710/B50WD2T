@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard"
 import Create from "./components/Create"
 import Edit from "./components/Edit"
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import { Navigate } from "react-router-dom"
 
 function App() {
   let [data,setData] = useState([
@@ -29,7 +30,8 @@ function App() {
         <Routes>
             <Route path='/dashboard' element={<Dashboard data={data} setData={setData}/>}/>
             <Route path='/create' element={<Create data={data} setData={setData}/>}/>
-            <Route path='/edit' element={<Edit/>}/>
+            <Route path='/edit/:id' element={<Edit data={data} setData={setData}/>}/>
+            <Route path='*'  element={<Navigate to='/dashboard'/>}/>
         </Routes>
       </BrowserRouter>
        
