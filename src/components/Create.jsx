@@ -8,10 +8,6 @@ import * as Yup from 'yup';
 function Create({data,setData}) {
   let navigate = useNavigate()
 
-  useEffect(()=>{
-    console.log('useEffect Triggered')
-  })
-
   const UserSchema = Yup.object().shape({
     name:Yup.string().required('* Required'),
     username:Yup.string().required('* Required').min(3,'* User Name should be atlest 3 characters'),
