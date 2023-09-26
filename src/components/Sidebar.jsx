@@ -46,8 +46,28 @@ function Sidebar() {
 {/* <!-- Nav Item - Utilities Collapse Menu --> */}
 <li className="nav-item">
     <div className="nav-link">
+       
+       <Link to='/nested-example'>
         <i className="fas fa-fw fa-wrench"></i>
-        <span>View User</span>
+        <span style={{color:"white"}}>Nested Example</span>
+       </Link>
+    </div>
+</li>
+
+<hr className="sidebar-divider"/>
+
+{/* <!-- Heading --> */}
+<div className="sidebar-heading">
+    Hooks
+</div>
+
+<li className="nav-item">
+    <div className="nav-link">
+       
+       <Link to='/useref'>
+        <i className="fas fa-fw fa-wrench"></i>
+        <span style={{color:"white"}}>useRef</span>
+       </Link>
     </div>
 </li>
 

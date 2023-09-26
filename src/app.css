@@ -1,0 +1,15 @@
+.pageButtons{
+    display: flex;
+    list-style: none;
+}
+
+.pageButtons li{
+    padding: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.pageButtons li.active{
+    background-color: #4e73df;
+    color:white
+}

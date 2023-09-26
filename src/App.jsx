@@ -5,6 +5,12 @@ import Create from "./components/Create"
 import Edit from "./components/Edit"
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import { Navigate } from "react-router-dom"
+import NestedExample from "./components/NestedExample"
+import Receipts from "./components/NestedExample/Receipts"
+import Accounts from "./components/NestedExample/Accounts"
+import Products from "./components/NestedExample/Products"
+import Staff from "./components/NestedExample/Staff"
+import UseRef from "./components/Hooks/UseRef"
 
 function App() {
   let [data,setData] = useState([
@@ -28,10 +34,17 @@ function App() {
       <BrowserRouter>
         <Sidebar/>
         <Routes>
-            <Route path='/dashboard' element={<Dashboard data={data} setData={setData}/>}/>
-            <Route path='/create' element={<Create data={data} setData={setData}/>}/>
-            <Route path='/edit/:id' element={<Edit data={data} setData={setData}/>}/>
-            <Route path='*'  element={<Navigate to='/dashboard'/>}/>
+            <Route path='dashboard' element={<Dashboard data={data} setData={setData}/>}/>
+            <Route path='create' element={<Create data={data} setData={setData}/>}/>
+            <Route path='edit/:id' element={<Edit data={data} setData={setData}/>}/>
+            <Route path='nested-example' element={<NestedExample/>}>
+                <Route path='accounts' element={<Accounts/>}/>
+                <Route path='products' element={<Products/>}/>
+                <Route path='receipts' element={<Receipts/>}/>
+                <Route path='staffs' element={<Staff/>}/>
+            </Route>
+            <Route path='/useref' element={<UseRef/>}/>
+            <Route path='/*'  element={<Navigate to='/dashboard'/>}/>
         </Routes>
       </BrowserRouter>
        
