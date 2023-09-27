@@ -69,6 +69,14 @@ function Sidebar() {
         <span style={{color:"white"}}>useRef</span>
        </Link>
     </div>
+
+    <div className="nav-link">
+       
+       <Link to='/usereducer'>
+        <i className="fas fa-fw fa-wrench"></i>
+        <span style={{color:"white"}}>useReducer</span>
+       </Link>
+    </div>
 </li>
 
 </ul>

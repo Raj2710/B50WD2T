@@ -11,6 +11,7 @@ import Accounts from "./components/NestedExample/Accounts"
 import Products from "./components/NestedExample/Products"
 import Staff from "./components/NestedExample/Staff"
 import UseRef from "./components/Hooks/UseRef"
+import UseReducer from "./components/Hooks/UseReducer"
 
 function App() {
   let [data,setData] = useState([
@@ -44,6 +45,7 @@ function App() {
                 <Route path='staffs' element={<Staff/>}/>
             </Route>
             <Route path='/useref' element={<UseRef/>}/>
+            <Route path='/usereducer' element={<UseReducer/>}/>
             <Route path='/*'  element={<Navigate to='/dashboard'/>}/>
         </Routes>
       </BrowserRouter>

@@ -19,7 +19,7 @@ function UseRef() {
 
     const handleSubmit = ()=>{
         const otp = `${ref1.current.value}${ref2.current.value}${ref3.current.value}${ref4.current.value}`
-        if(otp.length===4)
+        if(otp.length===4 && Number(otp))
             alert(`Entered OTP is ${otp}`)
         else
         {
@@ -42,10 +42,28 @@ function UseRef() {
     <br/>
     <h2>Enter OTP</h2>
     <div>
-        <input type='text' ref={ref1} onChange={()=>ref2.current.focus()}/>
-        <input type='text' ref={ref2} onChange={()=>ref3.current.focus()}/>
-        <input type='text' ref={ref3} onChange={()=>ref4.current.focus()}/>
-        <input type='text' ref={ref4} onChange={()=>setTimeout(()=>handleSubmit(),1000)}/>
+        <input type='text' ref={ref1} onKeyUp={(e)=>{
+            if(e.key==='Backspace' || e.key === 'Delete' && e.target.value.length===0)
+                ref1.current.focus()
+            else
+                ref2.current.focus()
+        }}/>
+        <input type='text' ref={ref2} onKeyUp={(e)=>{
+            if(e.key==='Backspace' || e.key === 'Delete' && e.target.value.length===0)
+                ref1.current.focus()
+            else
+                ref3.current.focus()
+        }}/>
+        <input type='text' ref={ref3} onKeyUp={(e)=>{
+            if(e.key==='Backspace' || e.key === 'Delete' && e.target.value.length===0)
+                ref2.current.focus()
+            else
+                ref4.current.focus()
+        }}/>
+        <input type='text' ref={ref4} onKeyUp={(e)=>{
+            if(e.key==='Backspace' || e.key === 'Delete' && e.target.value.length===0)
+                ref3.current.focus()
+        }}/>
 
         <Button variant='primary' onClick={()=>handleSubmit()}>Submit</Button>
     </div>
