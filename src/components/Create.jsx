@@ -1,13 +1,15 @@
-import React,{useEffect, useState} from 'react'
+import React,{useContext} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { UserDataContext } from './context/UserContext';
 
-function Create({data,setData}) {
+function Create() {
   let navigate = useNavigate()
-
+  let {data,setData} = useContext(UserDataContext)
+  
   const UserSchema = Yup.object().shape({
     name:Yup.string().required('* Required'),
     username:Yup.string().required('* Required').min(3,'* User Name should be atlest 3 characters'),

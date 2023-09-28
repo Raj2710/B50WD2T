@@ -12,41 +12,40 @@ import Products from "./components/NestedExample/Products"
 import Staff from "./components/NestedExample/Staff"
 import UseRef from "./components/Hooks/UseRef"
 import UseReducer from "./components/Hooks/UseReducer"
+import UserContext from "./components/context/UserContext"
+import DashboardContext from "./components/context/DashboardContext"
+import Home from "./components/Home"
 
 function App() {
-  let [data,setData] = useState([
-    {
-      name:"Ajith",
-      username:"ajith123",
-      email:"ajith@gmail.com",
-      mobile:"12345678",
-      batch:"B100",
-    },
-    {
-      name:"Kumar",
-      username:"kum2710",
-      email:"kumar@gmail.com",
-      mobile:"098765431",
-      batch:"B101",
-    }
-  ])
   return <>
     <div id='wrapper'>
       <BrowserRouter>
-        <Sidebar/>
         <Routes>
-            <Route path='dashboard' element={<Dashboard data={data} setData={setData}/>}/>
-            <Route path='create' element={<Create data={data} setData={setData}/>}/>
-            <Route path='edit/:id' element={<Edit data={data} setData={setData}/>}/>
-            <Route path='nested-example' element={<NestedExample/>}>
+            <Route path='dashboard' element={
+            <UserContext>
+              <DashboardContext>
+              <Sidebar/><Dashboard/>
+              </DashboardContext>
+            </UserContext>}/>
+            <Route path='create' element={
+              <UserContext>
+                <Sidebar/><Create/>
+              </UserContext>
+            }/>
+            <Route path='edit/:id' element={
+            <UserContext>
+              <Sidebar/><Edit/>
+            </UserContext>}/>
+            <Route path='nested-example' element={<><Sidebar/><NestedExample/></>}>
                 <Route path='accounts' element={<Accounts/>}/>
                 <Route path='products' element={<Products/>}/>
                 <Route path='receipts' element={<Receipts/>}/>
                 <Route path='staffs' element={<Staff/>}/>
             </Route>
-            <Route path='/useref' element={<UseRef/>}/>
-            <Route path='/usereducer' element={<UseReducer/>}/>
-            <Route path='/*'  element={<Navigate to='/dashboard'/>}/>
+            <Route path='/useref' element={<><Sidebar/><UseRef/></>}/>
+            <Route path='/usereducer' element={<><Sidebar/><UseReducer/></>}/>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/*'  element={<Navigate to='/'/>}/>
         </Routes>
       </BrowserRouter>
        

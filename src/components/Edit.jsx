@@ -1,12 +1,14 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useParams,useNavigate } from 'react-router-dom';
+import { UserDataContext } from './context/UserContext';
 
-const Edit = ({data,setData})=>{
+const Edit = ()=>{
   const params = useParams()
+  const {data,setData} = useContext(UserDataContext)
   const [initialValues,setInitialValues] = useState({
     name:"",
     email:"",
