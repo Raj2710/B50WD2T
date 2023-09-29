@@ -16,9 +16,10 @@ import UserContext from "./components/context/UserContext"
 import DashboardContext from "./components/context/DashboardContext"
 import Home from "./components/Home"
 import ProtectedRoute from './components/ProtectedRoute'
-
+// import logo from './assets/react.svg'
 function App() {
   return <>
+  {/* <img src={logo}/> */}
     <div id='wrapper'>
       <BrowserRouter>
         <Routes>
