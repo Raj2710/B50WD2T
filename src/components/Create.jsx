@@ -5,10 +5,24 @@ import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { UserDataContext } from './context/UserContext';
+import {toast} from 'react-toastify'
+import axios from 'axios';
 
 function Create() {
   let navigate = useNavigate()
-  let {data,setData} = useContext(UserDataContext)
+  let {API_URL} = useContext(UserDataContext)
+
+  const handleAddUser = async(values)=>{
+    try {
+      let res = await axios.post(API_URL,values)
+      if(res.status===201)
+      {
+        navigate('/dashboard')
+      }
+    } catch (error) {
+        toast.error("Error Occoured")
+    }
+  }
   
   const UserSchema = Yup.object().shape({
     name:Yup.string().required('* Required'),
@@ -30,14 +44,12 @@ function Create() {
             email:"",
             username:"",
             mobile:"",
-            batch:""
+            batch:"",
+            password:""
           }}
           validationSchema={UserSchema}
           onSubmit={(values)=>{
-            let newArray = [...data]//immutable deep copy
-            newArray.push(values)
-            setData(newArray)//state update
-            navigate('/dashboard')
+            handleAddUser(values)
           }}
         >
           {({ errors,touched,handleBlur,handleSubmit,handleChange})=>(
@@ -59,6 +71,12 @@ function Create() {
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" name='email' placeholder="Enter email"  onBlur={handleBlur} onChange={handleChange}/>
                 {errors.email && touched.email ? <div style={{color:"red"}}>{errors.email}</div>:null}
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" name='password' placeholder="Enter password"  onBlur={handleBlur} onChange={handleChange}/>
+                {errors.password && touched.password ? <div style={{color:"red"}}>{errors.password}</div>:null}
               </Form.Group>
     
               <Form.Group className="mb-3">

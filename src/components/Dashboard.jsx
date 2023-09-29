@@ -1,24 +1,53 @@
-import React,{useContext} from 'react'
+import React,{useContext,useEffect,useState} from 'react'
 import Tile from './Tile'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { UserDataContext } from './context/UserContext';
 import { DashboardDataContext } from './context/DashboardContext';
+import axios from 'axios'
 import UseLogout from './Hooks/UseLogout'
+import { toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 function Dashboard() {
-    
+    let [data,setData] = useState([])
     let {dashboardData} = useContext(DashboardDataContext)
-    let {data,setData} = useContext(UserDataContext)
+    let {API_URL} = useContext(UserDataContext)
     let logout = UseLogout()
-
     const navigate = useNavigate()
 
-    let handleDelete = (index)=>{
-        let newArray = [...data]//deep copy
-        newArray.splice(index,1)
-        setData(newArray)
+    let handleDelete = async(id,index)=>{
+      let newArray = [...data]
+      newArray.splice(index,1)
+      setData(newArray)
+       try {
+          let res = await axios.delete(`${API_URL}/${id}`)
+          if(res.status===200)
+          {
+            getData()
+          }
+       } catch (error) {
+        toast.error("Error Occoured")
+       }
     }
+
+    const getData = async()=>{
+     try {
+      let res = await axios.get(API_URL)
+      if(res.status===200)
+      {
+        // toast.success("User Data Fetched")
+        setData(res.data)
+      }
+     } catch (error) {
+        toast.error("Internal Server Error")
+     }
+      
+    }
+    useEffect(()=>{
+      getData()
+    },[])
+
 
   return <>
     <div className="container-fluid">
@@ -68,11 +97,11 @@ function Dashboard() {
                     <td>{e.batch}</td>
                     <td>
                         <Button variant='primary' onClick={()=>{
-                            navigate(`/edit/${i}`)
+                            navigate(`/edit/${e.id}`)
                         }}>Edit</Button>
                         &nbsp;
                         &nbsp;
-                        <Button variant='danger' onClick={()=>handleDelete(i)}>Delete</Button>
+                        <Button variant='danger' onClick={()=>handleDelete(e.id,i)}>Delete</Button>
                     </td>
                 </tr>
             })
