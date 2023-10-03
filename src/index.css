@@ -1,0 +1,47 @@
+.heading{
+    text-align: center;
+}
+
+.todo-wrapper
+{
+    width: 50%;
+    margin: auto;
+}
+
+.todo-tabs{
+    cursor: pointer;
+}
+
+.todo-tabs ul{
+    display: flex;
+    list-style: none;
+}
+
+.todo-tabs ul li{
+    padding: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.todo-tabs ul li.active{
+    background-color: #4e73df;
+    color:white
+}
+
+.strikeout{
+    text-decoration: line-through;
+}
+
+.create-todo{
+    display: flex;
+    justify-content: flex-start;
+    margin: 50px;
+}
+
+.create-input{
+    margin-right: 50px;
+}
+
+.todo-items ul{
+    list-style: none;   
+}
