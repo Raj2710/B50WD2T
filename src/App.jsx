@@ -16,6 +16,7 @@ import UserContext from "./components/context/UserContext"
 import DashboardContext from "./components/context/DashboardContext"
 import Home from "./components/Home"
 import ProtectedRoute from './components/ProtectedRoute'
+import Example from "./components/Example"
 // import logo from './assets/react.svg'
 function App() {
   return <>
@@ -27,10 +28,10 @@ function App() {
               <ProtectedRoute>
                 <UserContext>
                   <DashboardContext>
-                  <Sidebar/>
-                  <Dashboard/>
-              </DashboardContext>
-            </UserContext>
+                      <Sidebar/>
+                      <Dashboard/>  
+                  </DashboardContext>
+                </UserContext>
             </ProtectedRoute>}/>
             <Route path='create' element={
               <ProtectedRoute>
@@ -54,6 +55,7 @@ function App() {
             </Route>
             <Route path='/useref' element={<><ProtectedRoute><Sidebar/><UseRef/></ProtectedRoute></>}/>
             <Route path='/usereducer' element={<><ProtectedRoute><Sidebar/><UseReducer/></ProtectedRoute></>}/>
+            <Route path='/example' element={<Example/>}/>
             <Route path='/' element={
              <UserContext>
             <Home/>
