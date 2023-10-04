@@ -17,6 +17,8 @@ import DashboardContext from "./components/context/DashboardContext"
 import Home from "./components/Home"
 import ProtectedRoute from './components/ProtectedRoute'
 import Example from "./components/Example"
+import Notes from "./components/Notes"
+import FetchUser from "./components/FetchUser"
 // import logo from './assets/react.svg'
 function App() {
   return <>
@@ -56,6 +58,8 @@ function App() {
             <Route path='/useref' element={<><ProtectedRoute><Sidebar/><UseRef/></ProtectedRoute></>}/>
             <Route path='/usereducer' element={<><ProtectedRoute><Sidebar/><UseReducer/></ProtectedRoute></>}/>
             <Route path='/example' element={<Example/>}/>
+            <Route path='/notes' element={<Notes/>}/>
+            <Route path='/fetch-user' element={<FetchUser/>}/>
             <Route path='/' element={
              <UserContext>
             <Home/>
