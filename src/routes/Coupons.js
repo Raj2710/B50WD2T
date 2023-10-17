@@ -1,5 +1,5 @@
-const express = require('express')
-const CouponController = require('../controller/Coupons')
+import express from 'express'
+import CouponController from '../controller/Coupons.js'
 const router = express.Router()
 
 router.get('/',CouponController.getAllCoupons)
@@ -9,4 +9,4 @@ router.put('/:id',CouponController.editCoupon)
 router.delete('/:id',CouponController.deleteCoupon)
 
 
-module.exports = router
+export default router
