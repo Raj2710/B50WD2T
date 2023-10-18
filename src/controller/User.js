@@ -2,7 +2,7 @@ import userModel from '../models/User.js'
 import Auth from '../common/auth.js'
 const getUsers = async(req,res)=>{
    try {
-        let users = await userModel.find()
+        let users = await userModel.find({},{password:0})
         res.status(200).send({
             message:"User Data Fetched Successfully",
             users
@@ -117,6 +117,7 @@ const login = async(req,res)=>{
             if(hashCompare)
             {
                 let token = await Auth.createToken({
+                    id:user._id,
                     firstName:user.firstName,
                     lastName:user.lastName,
                     email:user.email,
