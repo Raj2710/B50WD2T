@@ -1,0 +1,23 @@
+.header-nav-items{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.blogs-wrapper{
+    margin: 0% 30% 0% 30%;
+    padding: 10px;
+}
+
+.card{
+    margin: 10px !important;
+}
+
+.table-image{
+    width: 100px;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
