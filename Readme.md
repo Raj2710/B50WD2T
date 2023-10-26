@@ -27,3 +27,6 @@ Admin Flow:
     2. Button or Toggle to approve the blog
     3. Approved blogs can be rejected with reasons
     4. Blogs for Approval can be Approved or rejected with reasons
+
+    POSTMAN Collection:
+    https://restless-meteor-878201.postman.co/workspace/Guvi~7b5d52b9-c63e-4a01-b581-23f41ac0a4ef/folder/15810886-06923ebb-74e0-46f0-b8a3-b29f7bfe519d?action=share&creator=15810886&ctx=documentation

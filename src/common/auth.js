@@ -36,11 +36,11 @@ const validate = async(req,res,next)=>{
             next()
         }
         else
-            res.status(400).send({message:"Token Expired"})
+            res.status(401).send({message:"Token Expired"})
     }
     else
     {
-        res.status(400).send({message:"No Token Found"})
+        res.status(401).send({message:"No Token Found"})
     }
 }
 
@@ -52,11 +52,11 @@ const adminGaurd = async(req,res,next)=>{
         if(payload.role==='admin')
             next()
         else
-            res.status(400).send({message:"Only Admins are allowed"})
+            res.status(401).send({message:"Only Admins are allowed"})
     }
     else
     {
-        res.status(400).send({message:"No Token Found"})
+        res.status(401).send({message:"No Token Found"})
     }
 }
 export default{

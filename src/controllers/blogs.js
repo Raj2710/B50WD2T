@@ -41,6 +41,7 @@ const editBlog = async(req,res)=>{
             blog.title = title
             blog.imageUrl = imageUrl
             blog.description = description
+            blog.status=Status.PENDING
             blog.modifiedAt = Date.now()
 
             await blog.save()
@@ -101,7 +102,7 @@ const getBlogById = async(req,res)=>{
 
 const getBlogsByUserId = async(req,res)=>{
     try {
-        let blogs = await blogModel.find({createdBy:req.headers.userId},{_id:1,title:1,imageUrl:1,createdAt:1}).sort({createdAt:1})
+        let blogs = await blogModel.find({createdBy:req.headers.userId},{_id:1,title:1,imageUrl:1,createdAt:1,status:1}).sort({createdAt:1})
         res.status(200).send({
             message:"Blogs Fetched Successfully",
             blogs
