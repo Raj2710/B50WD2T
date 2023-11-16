@@ -63,5 +63,6 @@ export default{
     hashCompare,
     createToken,
     validate,
-    adminGaurd
+    adminGaurd,
+    decodeToken
 }

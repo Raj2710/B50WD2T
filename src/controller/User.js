@@ -1,5 +1,7 @@
 import userModel from '../models/User.js'
 import Auth from '../common/auth.js'
+import EmailService from '../common/emailService.js'
+import auth from '../common/auth.js'
 const getUsers = async(req,res)=>{
    try {
         let users = await userModel.find({},{password:0})
@@ -149,11 +151,79 @@ const login = async(req,res)=>{
     }
 }
 
+const forgotPassword = async(req,res)=>{
+    try {
+         let user = await userModel.find({email:req.body.email},{password:0})
+        
+        if(user.length===1)
+        {
+            //create a token and send the reset url via mail
+            let token = await auth.createToken({
+                email:user[0].email,
+                firstName:user[0].firstName,
+                lastName:user[0].lastName,
+                id:user[0]._id
+            })
+            let url = `http://reactappurl.com?token=${token}`
+            await EmailService.forgetPassword({name:`${user[0].firstName} ${user[0].lastName}`,email:'nagarajan2727@outlook.com',url})
+            res.status(200).send({
+                message:"Reset Password Link Sent",
+                url
+            })
+        }
+        else
+        {
+            res.status(400).send({
+                message:`Account with ${req.body.email} does not exists`
+            })
+        }
+         
+    } catch (error) {
+     console.log(error)
+         res.status(500).send({
+             message:"Internal Server Error",
+             error:error.message
+         })
+    }
+ }
+
+ const resetPassword = async(req,res)=>{
+    try {
+        let token = req.headers.authorization?.split(" ")[1]
+         let data = await auth.decodeToken(token)
+
+         if(req.body.newpassword === req.body.confirmpassword)
+         {
+            let user = await userModel.findOne({email:data.email})
+            user.password = await auth.hashPassword(req.body.newpassword)
+            await user.save()
+
+            res.status(200).send({
+                message:"Password Updated Successfully",
+            })
+         }
+         else
+         {
+            res.status(400).send({
+                message:"Password Does Not match",
+            })
+         }
+    } catch (error) {
+     console.log(error)
+         res.status(500).send({
+             message:"Internal Server Error",
+             error:error.message
+         })
+    }
+ }
+
 export default {
     getUsers,
     create,
     getUserById,
     editUserById,
     deleteUserById,
-    login
+    login,
+    forgotPassword,
+    resetPassword
 }

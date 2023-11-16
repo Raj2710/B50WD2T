@@ -9,6 +9,8 @@ router.post('/',UserController.create)
 router.put('/:id',UserController.editUserById)
 router.delete('/:id',UserController.deleteUserById)
 router.post('/login',UserController.login)
+router.post('/forget-password',UserController.forgotPassword)
+router.post('/reset-password',Auth.validate,UserController.resetPassword)
 
 
 export default router
